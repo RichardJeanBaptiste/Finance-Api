@@ -28,12 +28,13 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 Quote.deleteMany({name: 'Warren Buffet'}).then((data) => {
     console.log(data);
 });
+*/
 
 
 Quote.find({}).then((data)=>{
     console.log(data)
 })
-*/
+
 
 app.get('/login', async (req,res) => {
     try {

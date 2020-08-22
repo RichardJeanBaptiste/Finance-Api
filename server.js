@@ -11,9 +11,11 @@ const bcrypt =  require('bcryptjs');
 const app = express();
 const config = require('./config');
 const PORT = 3000 || process.env.PORT;
+const quoteRoute = require('./routes/quoteRoutes')
 
 app.use(helmet());
 app.use(cors());
+app.use('/quotes', quoteRoute);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -30,11 +32,11 @@ Quote.deleteMany({name: 'Warren Buffet'}).then((data) => {
 });
 */
 
-
+/*
 Quote.find({}).then((data)=>{
     console.log(data)
 })
-
+*/
 
 app.get('/login', async (req,res) => {
     try {
@@ -46,6 +48,7 @@ app.get('/login', async (req,res) => {
 
 app.post('/admin', async (req,res) => {
     try {
+        let pass = req.body.password
         // check email
         let user = await Admin.findOne({ "username": req.body.username })
         if(!user){
@@ -54,7 +57,7 @@ app.post('/admin', async (req,res) => {
         // check password
         let userId = await Admin.find({"username": req.body.username},'password' ,function(err, docs){
             
-            bcrypt.compare(req.body.password, docs[1].password).then((x) => {
+            bcrypt.compare(req.body.password, docs[0].password).then((x) => {
                 if(x === true){
                     res.sendFile(__dirname + '/views/AddQuotes.html');
                 }else{
@@ -63,9 +66,11 @@ app.post('/admin', async (req,res) => {
             }).catch((err) => {
                 console.log(err);
             });
+        
            
         })
         //const token = jwt.sign({_id: user._id}, config.secret);
+        
     } catch (error) {
         res.send(error)
     }

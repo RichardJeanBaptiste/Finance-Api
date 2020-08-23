@@ -34,9 +34,11 @@ Quote.deleteMany({name: 'Warren Buffet'}).then((data) => {
 
 /*
 Quote.find({}).then((data)=>{
-    console.log(data)
+    console.log(data);
 })
+
 */
+
 
 app.get('/login', async (req,res) => {
     try {
@@ -65,12 +67,9 @@ app.post('/admin', async (req,res) => {
                 }
             }).catch((err) => {
                 console.log(err);
-            });
-        
-           
+            });  
         })
         //const token = jwt.sign({_id: user._id}, config.secret);
-        
     } catch (error) {
         res.send(error)
     }

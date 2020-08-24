@@ -3,6 +3,8 @@ const router = express.Router()
 const Quote = require('../models/qoute.models')
 const { count } = require('../models/qoute.models')
 
+
+
 //get all qoutes from specific author
 router.get('/:author', async function(req,res){
     try {

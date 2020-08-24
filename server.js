@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt =  require('bcryptjs');
 const app = express();
 const config = require('./config');
+const mongoDB = require('./mongodb');
 const PORT = 3000 || process.env.PORT;
 const quoteRoute = require('./routes/quoteRoutes')
 
@@ -19,25 +20,14 @@ app.use('/quotes', quoteRoute);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const mongoDB = 'mongodb://127.0.0.1:27017/';
-mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology:true});
-let db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-
-
-/*
-Quote.deleteMany({name: 'Warren Buffet'}).then((data) => {
-    console.log(data);
-});
-*/
-
-/*
-Quote.find({}).then((data)=>{
-    console.log(data);
-})
-
-*/
+try {
+    mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology:true}).catch((err)=> {
+        console.log(err)
+    });
+} catch (error) {
+    let db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+}
 
 
 app.get('/login', async (req,res) => {

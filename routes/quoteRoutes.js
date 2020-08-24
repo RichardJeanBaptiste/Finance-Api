@@ -1,13 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const Quote = require('../models/qoute.models')
-const { count } = require('../models/qoute.models')
-
 
 
 //get all qoutes from specific author
 router.get('/:author', async function(req,res){
     try {
+
         let quotes = await Quote.find({name: req.params.author}).then((data)=>{
             return data
         })
@@ -16,6 +15,29 @@ router.get('/:author', async function(req,res){
     } catch (error) {
         res.send(error)
     }  
+})
+
+// get X amount of quotes from author
+router.get('/:author/limit=:limit', async function(req,res){
+    try {
+
+        let limit = req.params.limit;
+
+        let quotes = await Quote.find({name: req.params.author}).then((data)=>{
+            let quoteArr = [];
+
+            for(i = 0; i < limit; i++){
+                quoteArr.push(data[i]);
+            }
+
+            return quoteArr
+        })
+
+        res.send(quotes)
+        
+    } catch (error) {
+        res.send(error)
+    }
 })
 
 // get random quote from specific author
@@ -35,10 +57,10 @@ router.get('/:author/rand', async function(req,res){
     } catch (error) {
         res.send(error);
     }
-
 })
+
 // get random quote
-router.get('/random/r', async function(req,res){
+router.get('/random/qr', async function(req,res){
     try {
         
         const allQuotes = await Quote.find({}).then((data)=>{
@@ -51,12 +73,11 @@ router.get('/random/r', async function(req,res){
         });
 
         res.send(allQuotes[count])
-
+        
     } catch (error) {
         
     }
 })
 
-// get specific quote
 
 module.exports = router;

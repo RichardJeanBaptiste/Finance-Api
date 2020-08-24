@@ -11,7 +11,7 @@ const bcrypt =  require('bcryptjs');
 const app = express();
 const config = require('./config');
 const mongoDB = require('./mongodb');
-const PORT = 3000 || process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const quoteRoute = require('./routes/quoteRoutes')
 
 app.use(helmet());

@@ -29,6 +29,7 @@ try {
     db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 }
 
+//main view
 app.get('/', async function(req,res){
     res.sendFile(__dirname + "/views/index.html")
 })

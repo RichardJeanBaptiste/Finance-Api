@@ -5,7 +5,7 @@
 ### By Author Name
 
   - Access all the quotes we have by specific author
-  - financequotesapi.herokuapp.com/quotes/{author name} - (use only first and last name)
+  - financequotesapi.herokuapp.com/quotes/{author name} 
   - Get specific amount of quotes:
   - financequotesapi.herokuapp.com/quotes/{author name}/limit={limit}
   

@@ -12,7 +12,8 @@ const app = express();
 //const config = require('./config');
 const mongoDB = require('./mongodb');
 const PORT = process.env.PORT || 3000;
-const quoteRoute = require('./routes/quoteRoutes')
+const quoteRoute = require('./routes/quoteRoutes');
+const create = require('./create');
 
 app.use(helmet());
 app.use(cors());
@@ -29,10 +30,30 @@ try {
     db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 }
 
+//create("John Kenneth Galbraith");
+
+
 //main view 
 app.get('/', async function(req,res){
     res.sendFile(__dirname + "/views/index.html")
 })
+
+app.get('/login', async function(req,res){
+    res.sendFile(__dirname + "/views/login.html")
+});
+
+app.post('/admin', async function(req,res){
+    let username = req.body.username;
+    let password = req.body.password;
+
+    Admin.find({username: username, password: password}).then((data)=> {
+        if(data.length == 0 || data === undefined){
+            res.send("User Not Found")
+        }else{
+            res.sendFile(__dirname + "/views/admin.html")
+        }
+    });
+});
 
 
 app.listen(PORT, () => {

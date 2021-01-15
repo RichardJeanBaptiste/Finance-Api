@@ -11,7 +11,6 @@ const loginSchema = new mongoose.Schema({
         type: String,
         required: 'Password required'
     },
-    admin: Boolean
 })
 
 const adminSchema = new mongoose.Schema({

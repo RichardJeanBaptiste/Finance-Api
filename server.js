@@ -20,6 +20,7 @@ app.use(cors());
 app.use('/quotes', quoteRoute);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
 
 try {
     mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology:true}).catch((err)=> {
@@ -53,6 +54,11 @@ app.post('/admin', async function(req,res){
             res.sendFile(__dirname + "/views/admin.html")
         }
     });
+});
+
+app.post('/addquotes', async function(req,res){
+    console.log(req.body);
+    res.send("addquotes");
 });
 
 

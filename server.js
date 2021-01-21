@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt =  require('bcryptjs');
 const app = express();
 //const config = require('./config');
-const mongoDB = require('./mongodb');
+//const mongoDB = require('./mongodb');
 const PORT = process.env.PORT || 3000;
 const quoteRoute = require('./routes/quoteRoutes');
 const create = require('./create');
@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
 try {
-    mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology:true}).catch((err)=> {
+    mongoose.connect('mongodb+srv://Richinbk:VZUbwFmW3d4EUSjw@finance-api.jvol5.mongodb.net/Finance-Quotes?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology:true}).catch((err)=> {
         console.log(err)
     });
 } catch (error) {

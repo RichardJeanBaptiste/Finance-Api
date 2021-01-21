@@ -31,9 +31,6 @@ try {
     db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 }
 
-//create("John Kenneth Galbraith");
-
-
 //main view 
 app.get('/', async function(req,res){
     res.sendFile(__dirname + "/views/index.html")
@@ -57,8 +54,30 @@ app.post('/admin', async function(req,res){
 });
 
 app.post('/addquotes', async function(req,res){
-    console.log(req.body);
-    res.send("addquotes");
+    try {
+
+        let author = req.body.author;
+        let count = Object.keys(req.body).length;
+
+        if(count === 1){
+            res.send("Empty Params");
+        }else{
+
+            for(let key in req.body){
+                if(req.body[key] != author){
+                    //console.log(req.body[key]);
+                    create(author,req.body[key]);
+                }
+            }
+    
+            res.send("Quotes Added");
+        }
+        
+    } catch (error) {
+        
+        res.send(error);
+    }
+    
 });
 
 

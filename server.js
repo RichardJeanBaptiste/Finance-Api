@@ -9,7 +9,6 @@ const {Login, Admin} = require('./models/login.models');
 const loginSchema = require('./Schemas/login.schema');
 const bcrypt =  require('bcryptjs');
 const app = express();
-const mongoDB = require('./mongodb');
 const PORT = process.env.PORT || 3000;
 const quoteRoute = require('./routes/quoteRoutes');
 const create = require('./create');
@@ -19,11 +18,13 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy;
 const flash = require('connect-flash');
 const timeout = require('connect-timeout');
+const morgan = require('morgan');
 const saltRounds = 10;
 
 
 
 app.use(helmet());
+app.use(morgan('combined'));
 app.use(cors());
 app.use('/quotes', quoteRoute);
 app.use(express.urlencoded({ extended: false }));

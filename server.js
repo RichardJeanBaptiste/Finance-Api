@@ -1,4 +1,4 @@
-//require('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -22,14 +22,22 @@ const morgan = require('morgan');
 const saltRounds = 10;
 
 
-
 app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ["'self'"],
+        imgSrc: ["'self'"],
+        scriptSrc: [" 'self'", "https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"],
+        styleSrc: ["'self'", 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css'],
+    }
+}))
 app.use(morgan('combined'));
 app.use(cors());
 app.use('/quotes', quoteRoute);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(session({ 
     secret: process.env.SECRET_KEY,
     resave: false,

@@ -1,33 +1,51 @@
+<!--- 
+    Icon
+    Link Color
+    change font?
+    example response? - json snippet html
+
+-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel='icon' href='/images/money.png'>
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <title>Financial Quotes</title>
 </head>
 <body>
-    <h1 style="text-align: center;">Financial Quotes Api Reference</h1>
-    <br/>
-    <br/>
-    <h2>Access some of the greatest finance quotes from authors all over the world</h2>
-    <br/>
-    <h3>By author name</h3>
-    <p>Access all the quotes we have by specific author</p>
-    <p>Api call:</p>
-    <p>financequotesapi.herokuapp.com/quotes/{author name} - (use only first and last name)</p>
-    <p>Get specific amount of quotes:</p>
-    <p>financequotesapi.herokuapp.com/quotes/{author name}/limit={limit}</p>
-    <br/>
-    <h3>Get random quote from author</h3>
-    <p>Api call:</p>
-    <p>financequotesapi.herokuapp.com/quotes/{author name}/rand</p>
-    <br/>
-    <h3>Get random quote</h3>
-    <p>Api call:</p>
-    financequotesapi.herokuapp.com/quotes/random/qr
+    <div class="main-container">
 
+        <h1 class="title">Financial Quotes Api Reference</h1>
+        <br/>
+        <br/>
+        <h2>Access some of the greatest finance quotes from authors all over the world</h2>
+        <br/>
+        <h3>By author name</h3>
+        <p>Access all the quotes we have by specific author</p>
+        <p>Api call:</p>
+        <p class="link-style">financequotesapi.herokuapp.com/quotes/{author name} - (use only first and last name)</p>
+        <p>Get specific amount of quotes:</p>
+        <p class="link-style">financequotesapi.herokuapp.com/quotes/{author name}/limit={limit}</p>
+        <br/>
+        <h3>Get random quote from author</h3>
+        <p>Api call:</p>
+        <p class="link-style">financequotesapi.herokuapp.com/quotes/{author name}/rand</p>
+        <br/>
+        <h3>Get random quote</h3>
+        <p>Api call:</p>
+        <p class="link-style">financequotesapi.herokuapp.com/quotes/random/qr</p>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </div>
+    <div>
+
+    </div>
+    
+    
 </body>
 </html>

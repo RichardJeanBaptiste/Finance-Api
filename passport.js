@@ -36,11 +36,3 @@ const CheckUserLogin = passport.use(new LocalStrategy(function(username, passwor
 
 
 module.exports = { CheckUserLogin };
-
- // This is how you handle error
-        /*
-        if (err) return done(err);        // When user is not found
-        if (!user) return done(null, false);        // When password is not correct
-        if (!user.authenticate(password)) return done(null, false);        // When all things are good, we return the user
-        return done(null, user);
-        */

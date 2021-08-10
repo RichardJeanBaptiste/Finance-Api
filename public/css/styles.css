@@ -1,8 +1,25 @@
-.flex-container {
-    display: flex;
-    flex-direction: column;
+/*  Index Page Styles   */
+
+.main-container {
+    margin-left: 2%;
+    padding-bottom: 5%;
 }
 
-.input-container {
-    margin-top: 2%;
+.title {
+    text-align: center;
 }
+
+.link-style {
+    color: blue;
+    text-decoration: underline;
+}
+
+/*  Login Page Styles   */
+.form-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+

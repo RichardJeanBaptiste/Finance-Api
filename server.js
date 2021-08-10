@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -48,10 +48,16 @@ passport.deserializeUser(function(user, done) {
     done(null, user);
 });
 
-//console.log(process.env.MONGO_URI);
+try {
+    console.log(process.env.MONGO_URI);
+    console.log(process.env.TEST);
+} catch (error) {
+    console.log(error)
+}
+
 // connect to database
 try {
-    mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology:true}).catch((err)=> {
+    mongoose.connect('mongodb+srv://Richinbk:VZUbwFmW3d4EUSjw@finance-api.jvol5.mongodb.net/Finance-Quotes?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology:true}).catch((err)=> {
         console.log(err)
     });
 } catch (error) {
@@ -60,7 +66,7 @@ try {
 }
 
 const store = new MongoDBStore({
-    uri: process.env.MONGO_URI,
+    uri: 'mongodb+srv://Richinbk:VZUbwFmW3d4EUSjw@finance-api.jvol5.mongodb.net/Finance-Quotes?retryWrites=true&w=majority',
     collection: 'mySessions'
 });
 
@@ -69,7 +75,7 @@ const store = new MongoDBStore({
 
 passport.use(new LocalStrategy( async function(username, password, done) {
 
-    const conn = mongoose.createConnection(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology:true, poolSize:1});
+    const conn = mongoose.createConnection('mongodb+srv://Richinbk:VZUbwFmW3d4EUSjw@finance-api.jvol5.mongodb.net/Finance-Quotes?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology:true, poolSize:1});
     const AdminModel = conn.model('Admin', loginSchema);
 
     AdminModel.findOne({ username: username }, async function(err, user) {

@@ -48,7 +48,7 @@ passport.deserializeUser(function(user, done) {
     done(null, user);
 });
 
-console.log(process.env.MONGO_URI);
+//console.log(process.env.MONGO_URI);
 // connect to database
 try {
     mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology:true}).catch((err)=> {

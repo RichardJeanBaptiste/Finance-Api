@@ -3,7 +3,8 @@ let listNum = 0;
 window.onload = init;
 
 function init () {
-    console.log("hello world");  
+    //console.log("hello world"); 
+
 }
 
 document.getElementById("addBtn").addEventListener('click', function(){
@@ -13,7 +14,7 @@ document.getElementById("addBtn").addEventListener('click', function(){
     let div =  document.createElement('div');
     div.id = textAreaId;
     div.className = 'input-container';
-    div.innerHTML = '<input type="text" name= '+ remove + '><button id='+ remove +' type="button">x</button>';
+    div.innerHTML = '<input class="form-control add-form-style" type="text" name= '+ remove + '><button class="btn btn-secondary btn-sm add-form-button-style" id='+ remove +' type="button">x</button>';
     document.getElementById("formContainer").appendChild(div);
 
     document.getElementById(remove).addEventListener('click', function(){

@@ -15,11 +15,53 @@
 }
 
 /*  Login Page Styles   */
+
 .form-container {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/*  Add Page Styles   */
+
+.main-content {
+    margin-top: 6%;
+}
+
+.add-title {
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 2%;
+}
+
+.add-form-container {
+    margin-top: 5%;
+    width: 40em;
+    height: 15em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.add-form-style {
+    margin-left: 5%;
+}
+
+.add-form-button-style {
+    margin-left: 2%;
+}
+
+.author-input {
+    margin-left: -15px;
+    width: 40vw;
+    height: 6vh;
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    padding-bottom: 10px;
 }
 
 

@@ -23,3 +23,7 @@ document.getElementById("addBtn").addEventListener('click', function(){
 
     listNum = listNum + 1;
 });
+
+document.getElementById("clearButton").addEventListener('click', function(){
+    document.getElementById('formContainer').innerHTML = "";
+});

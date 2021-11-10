@@ -38,7 +38,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
-app.use(express.static('client/build'));
+//app.use(express.static('client/build'));
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(session({ 
     secret: process.env.SECRET_KEY,
     resave: false,
@@ -112,7 +113,7 @@ passport.use(new LocalStrategy( async function(username, password, done) {
 }));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
 

@@ -22,7 +22,22 @@ const morgan = require('morgan');
 const saltRounds = 10;
 
 
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+/*
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
+
+function errorHandler(err, req, res, next){
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+}
+
+app.use(errorHandler)
+*/
+
 app.use(helmet());
+
 app.use(helmet.contentSecurityPolicy({
     directives: {
         defaultSrc: ["'self'"],
@@ -31,15 +46,14 @@ app.use(helmet.contentSecurityPolicy({
         styleSrc: ["'self'", 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css'],
     }
 }))
+
 app.use(morgan('combined'));
 app.use(cors());
 app.use('/quotes', quoteRoute);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
-app.use(express.static(pub))
-//app.use(express.static('client/build'));
+//app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(session({ 
     secret: process.env.SECRET_KEY,
@@ -113,12 +127,12 @@ passport.use(new LocalStrategy( async function(username, password, done) {
 
 }));
 
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
-
-/*main view 
+//main view 
 app.get('/', async function(req,res){
     res.sendFile(__dirname + "/views/index.html")
 })
@@ -130,7 +144,7 @@ app.get('/login', async function(req,res){
 app.post('/login', timeout('29s') ,passport.authenticate('local', { failureRedirect: '/login'}), function(req,res){
     res.sendFile(__dirname + "/views/admin.html")
 })
-*/
+
 
 
 app.post('/addquotes', async function(req,res){
@@ -164,20 +178,17 @@ function haltOnTimedout (req, res, next) {
 }
 
 
-// Catch route errors
 function errorHandler(err, req, res, next){
-    console.log(err)
-    res.send('Something Broke - Wait a minute and try reloading the page')
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
 }
+
+app.use(errorHandler)
+
 
 // Catch Store Errors
 store.on('error', function(error) {
     console.log(error);
   });
-
-
-
-app.use(errorHandler);
 
 
 app.listen(PORT, () => {

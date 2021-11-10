@@ -39,7 +39,7 @@ app.use(express.json());
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 //app.use(express.static('client/build'));
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, '/client/build')));
 app.use(session({ 
     secret: process.env.SECRET_KEY,
     resave: false,

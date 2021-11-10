@@ -24,7 +24,6 @@ const saltRounds = 10;
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-/*
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
@@ -34,10 +33,7 @@ function errorHandler(err, req, res, next){
 }
 
 app.use(errorHandler)
-*/
-
 app.use(helmet());
-
 app.use(helmet.contentSecurityPolicy({
     directives: {
         defaultSrc: ["'self'"],
@@ -46,15 +42,11 @@ app.use(helmet.contentSecurityPolicy({
         styleSrc: ["'self'", 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css'],
     }
 }))
-
 app.use(morgan('combined'));
 app.use(cors());
 app.use('/quotes', quoteRoute);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-//app.use(express.static(__dirname + '/public'));
-//app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
-app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(session({ 
     secret: process.env.SECRET_KEY,
     resave: false,
@@ -127,12 +119,20 @@ passport.use(new LocalStrategy( async function(username, password, done) {
 
 }));
 
-
+/*
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
-//main view 
+function errorHandler(err, req, res, next){
+    //res.send('ABCD')
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+}
+
+app.use(errorHandler)
+
+
+main view 
 app.get('/', async function(req,res){
     res.sendFile(__dirname + "/views/index.html")
 })
@@ -173,16 +173,11 @@ app.post('/addquotes', async function(req,res){
     
 });
 
+*/
+
 function haltOnTimedout (req, res, next) {
     if(!req.timedout) next()
 }
-
-
-function errorHandler(err, req, res, next){
-    res.sendFile(path.join(__dirname + '/client/build/index.html'));
-}
-
-app.use(errorHandler)
 
 
 // Catch Store Errors

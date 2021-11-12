@@ -9,10 +9,12 @@ const {Login, Admin} = require('./models/login.models');
 const loginSchema = require('./Schemas/login.schema');
 const bcrypt =  require('bcryptjs');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 const quoteRoute = require('./routes/quoteRoutes');
+const AdminRoutes = require('./routes/AdminRoutes');
 const create = require('./create');
-const session = require('express-session')
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy;
@@ -20,18 +22,68 @@ const flash = require('connect-flash');
 const timeout = require('connect-timeout');
 const morgan = require('morgan');
 const saltRounds = 10;
+const MONGOURI = process.env.MONGO_URI || "mongodb+srv://Richinbk:VZUbwFmW3d4EUSjw@finance-api.jvol5.mongodb.net/Finance-Quotes?retryWrites=true&w=majority";
 
+
+// connect to database
+try {
+    mongoose.connect(MONGOURI, {useNewUrlParser: true, useUnifiedTopology:true}).catch((err)=> {
+        console.log(err)
+    });
+} catch (error) {
+    let db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+}
+
+const store = new MongoDBStore({
+    uri: MONGOURI,
+    collection: 'Sessions'
+});
+
+// Catch Store Errors
+store.on('error', function(error) {
+    console.log(error);
+});
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+  
+passport.deserializeUser(function(user, done) {
+    done(null, user);
+});
 
 app.use(express.static(path.join(__dirname, 'client/build')));
+
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
+
+
 function errorHandler(err, req, res, next){
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 }
 
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(session({ 
+    secret: process.env.SECRET_KEY || 'secret cat',
+    resave: true,
+    saveUninitialized: true,
+    cookie: 
+        { 
+            secure: true, 
+            maxAge: 60000,  
+        },
+    store: store,
+}))
+//app.use(flash())
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(errorHandler)
 app.use(helmet());
 app.use(helmet.contentSecurityPolicy({
@@ -44,46 +96,16 @@ app.use(helmet.contentSecurityPolicy({
 }))
 app.use(morgan('combined'));
 app.use(cors());
+
 app.use('/quotes', quoteRoute);
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(session({ 
-    secret: process.env.SECRET_KEY,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true , maxAge: 60000 }
-}))
-app.use(flash())
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser(function(user, done) {
-    done(null, user);
-});
-  
-passport.deserializeUser(function(user, done) {
-    done(null, user);
-});
-
-
-// connect to database
-try {
-    mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology:true}).catch((err)=> {
-        console.log(err)
-    });
-} catch (error) {
-    let db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-}
-
-const store = new MongoDBStore({
-    uri: process.env.MONGO_URI,
-    collection: 'mySessions'
-});
+app.use('/admin', AdminRoutes);
 
 
 
 
+
+
+/*
 passport.use(new LocalStrategy( async function(username, password, done) {
 
     const conn = mongoose.createConnection(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology:true, poolSize:1});
@@ -119,7 +141,7 @@ passport.use(new LocalStrategy( async function(username, password, done) {
 
 }));
 
-/*
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
@@ -179,11 +201,6 @@ function haltOnTimedout (req, res, next) {
     if(!req.timedout) next()
 }
 
-
-// Catch Store Errors
-store.on('error', function(error) {
-    console.log(error);
-  });
 
 
 app.listen(PORT, () => {

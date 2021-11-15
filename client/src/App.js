@@ -12,7 +12,7 @@ function App() {
             <Route path="/" element={<Index/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/login/:fail" element={<Login failLogin={true}/>}/>
-            <Route path="/admin/home" element={<Home/>}/>
+            <Route path="/admin/home/:username/:userId" element={<Home/>}/>
             <Route path="/test" element={<Test default={true}/>}/>
             <Route path="/test/:userId" element={<Test default={false}/>}/>
         </Routes>

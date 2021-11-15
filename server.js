@@ -37,7 +37,7 @@ try {
 
 const store = new MongoDBStore({
     uri: MONGOURI,
-    collection: 'Sessions'
+    collection: 'sessions'
 });
 
 // Catch Store Errors
@@ -73,11 +73,11 @@ app.use(cookieParser());
 app.use(session({ 
     secret: process.env.SECRET_KEY || 'secret cat',
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: 
         { 
             secure: true, 
-            maxAge: 60000,  
+            maxAge: 3600000,  
         },
     store: store,
 }))

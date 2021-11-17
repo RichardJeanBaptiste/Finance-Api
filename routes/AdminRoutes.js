@@ -75,8 +75,6 @@ router.post('/checklogin', function(req, res){
         }
     })
     
-    
-    //res.send("abc")
 });
 
 

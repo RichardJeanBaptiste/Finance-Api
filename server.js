@@ -101,73 +101,7 @@ app.use('/quotes', quoteRoute);
 app.use('/admin', AdminRoutes);
 
 
-
-
-
-
 /*
-passport.use(new LocalStrategy( async function(username, password, done) {
-
-    const conn = mongoose.createConnection(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology:true, poolSize:1});
-    const AdminModel = conn.model('Admin', loginSchema);
-
-    AdminModel.findOne({ username: username }, async function(err, user) {
-
-        let UserData = JSON.parse(JSON.stringify(user));
-       
-        if (err)  return done(err);
-
-        if (!user) {
-          return done(null, false, { message: 'Incorrect username.' });
-        }
-
-        try {
-            bcrypt.compare(password,UserData.password,function(err,result){
-                //if(err) return err;
-                //console.log(result);
-                if(result === false){
-                    return done(null, false, { message: 'Incorrect password.' });
-                }else if(result === true){
-                    console.log('Success')
-                }
-            })
-            
-        } catch (error) {
-            console.log("bcError: - " + error)
-        }
-       
-        return done(null, user);
-    });
-
-}));
-
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/client/build/index.html'));
-});
-
-function errorHandler(err, req, res, next){
-    //res.send('ABCD')
-    res.sendFile(path.join(__dirname + '/client/build/index.html'));
-}
-
-app.use(errorHandler)
-
-
-main view 
-app.get('/', async function(req,res){
-    res.sendFile(__dirname + "/views/index.html")
-})
-
-app.get('/login', async function(req,res){
-    res.sendFile(__dirname + "/views/login.html")
-});
-
-app.post('/login', timeout('29s') ,passport.authenticate('local', { failureRedirect: '/login'}), function(req,res){
-    res.sendFile(__dirname + "/views/admin.html")
-})
-
-
 
 app.post('/addquotes', async function(req,res){
     try {

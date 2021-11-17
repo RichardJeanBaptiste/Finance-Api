@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Admin from './Admin';
 
 
 export default function Home(){
@@ -35,7 +36,7 @@ export default function Home(){
     if(isLoggedIn === 'true'){
         return (
             <Box>
-                <h1>Admin Home</h1>
+                <Admin/>
             </Box>
         )
     }else{

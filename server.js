@@ -24,6 +24,8 @@ const saltRounds = 10;
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+app.use('/quotes', quoteRoute);
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
@@ -44,7 +46,6 @@ app.use(helmet.contentSecurityPolicy({
 }))
 app.use(morgan('combined'));
 app.use(cors());
-app.use('/quotes', quoteRoute);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(session({ 

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,15 +11,29 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import FaceIcon from '@mui/icons-material/Face';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import Typography from '@mui/material/Typography';
+import AppBar from '@mui/material/AppBar';
+
 
 
 
 export default function Admin() {
 
-    let drawerWidth = '300px';
+    let drawerWidth = '200px';
+
+    const [ CurrentDatabase, setCurrentDatabase ] = useState("Database");
 
     return (
         <>
+            <Box sx={{ display: 'flex', flexDirection:'column'}}>
+
+                <AppBar sx={{ height: '80px'}}>
+                    <Typography align='center' sx={{marginTop:'1.5%'}}>{CurrentDatabase}</Typography>
+                </AppBar>
+
+                <Box sx={{ marginLeft: '47.5%', marginTop: '8%'}}>
+                    <Typography variant='h5'>Collection</Typography>
+                </Box>
+            </Box>
             <Box>
                 <Drawer
                     sx={{
@@ -35,8 +50,7 @@ export default function Admin() {
                 <Toolbar />
                     <List>
                         <ListItem>
-                            
-                        <ListItemText primary={<Typography variant='h4'>Database</Typography>} />
+                            <ListItemText primary={<Typography variant='h4'>Databases</Typography>} />
                         </ListItem>
                     </List>
                 <Divider />
@@ -73,3 +87,4 @@ export default function Admin() {
         </>
     )
 }
+

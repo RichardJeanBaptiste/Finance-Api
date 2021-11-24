@@ -14,7 +14,7 @@ const MONGOURI = process.env.MONGO_URI || "mongodb+srv://Richinbk:VZUbwFmW3d4EUS
 
 
 passport.use(new LocalStrategy( async function(username, password, done) {
-
+    
     const conn = mongoose.createConnection(MONGOURI, {useNewUrlParser: true, useUnifiedTopology:true, poolSize:1});
     const AdminModel = conn.model('Admin', loginSchema);
 
@@ -33,7 +33,7 @@ passport.use(new LocalStrategy( async function(username, password, done) {
                 
 
                 if(err) return err;
-                //console.log(result);
+                console.log(result);
                 if(result == false){
                     //console.log('fail')
                     return done(null, false, { message: 'Incorrect password.' });
@@ -46,10 +46,7 @@ passport.use(new LocalStrategy( async function(username, password, done) {
         } catch (error) {
             console.log("bcError: - " + error)
         }
-       
-        
     });
-
 }));
 
 
@@ -81,7 +78,6 @@ router.post('/checklogin', function(req, res){
 router.post('/login', passport.authenticate('local', {failureRedirect: 'http://localhost:3000/login/fail'}),function(req, res){
     try {
         
-
         req.session.save(function(err) {
             if(err) console.log(err);
             // session saved
@@ -94,7 +90,6 @@ router.post('/login', passport.authenticate('local', {failureRedirect: 'http://l
         res.send("Sorry couldn't get the homepage")
     }
 });
-
 
 
 

@@ -42,6 +42,7 @@ const store = new MongoDBStore({
 
 // Catch Store Errors
 store.on('error', function(error) {
+    //console.log('Store Error')
     console.log(error);
 });
 
@@ -54,17 +55,6 @@ passport.deserializeUser(function(user, done) {
 });
 
 app.use(express.static(path.join(__dirname, 'client/build')));
-
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/client/build/index.html'));
-});
-
-
-
-function errorHandler(err, req, res, next){
-    res.sendFile(path.join(__dirname + '/client/build/index.html'));
-}
 
 
 app.use(express.json());
@@ -97,8 +87,20 @@ app.use(helmet.contentSecurityPolicy({
 app.use(morgan('combined'));
 app.use(cors());
 
-app.use('/quotes', quoteRoute);
+
 app.use('/admin', AdminRoutes);
+app.use('/quotes', quoteRoute);
+
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
+
+
+
+function errorHandler(err, req, res, next){
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+}
 
 
 /*

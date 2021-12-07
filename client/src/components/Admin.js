@@ -12,8 +12,15 @@ import FaceIcon from '@mui/icons-material/Face';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
+import FinancialQuotesGrid from './FinancialQuotesGrid';
 
-
+/**
+ * Create Seperate Components For Each Database
+ * Switch Between Components On Click
+ * Import Quote Database
+ * Display Database with mui/Grid
+ * Add Grid Actions
+ */
 
 
 export default function Admin() {
@@ -32,6 +39,7 @@ export default function Admin() {
 
                 <Box sx={{ marginLeft: '47.5%', marginTop: '8%'}}>
                     <Typography variant='h5'>Collection</Typography>
+                    <FinancialQuotesGrid/>
                 </Box>
             </Box>
             <Box>

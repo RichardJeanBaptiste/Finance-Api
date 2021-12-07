@@ -3,6 +3,23 @@ const router = express.Router()
 const Quote = require('../models/qoute.models')
 
 
+// get all quotes
+router.get('/all', async function(req,res){
+    try {
+        let quotes = await Quote.find({}).then((data) => {
+            return data
+        })
+
+        //res.send(quotes)
+        res.header('Access-Control-Allow-Headers', '*')
+        res.json(JSON.stringify(quotes))
+        //res.json(quotes)
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+
 //get all qoutes from specific author
 router.get('/:author', async function(req,res){
     try {

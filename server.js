@@ -71,7 +71,6 @@ app.use(session({
         },
     store: store,
 }))
-//app.use(flash())
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(errorHandler)

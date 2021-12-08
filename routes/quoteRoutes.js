@@ -12,8 +12,8 @@ router.get('/all', async function(req,res){
 
         //res.send(quotes)
         res.header('Access-Control-Allow-Headers', '*')
-        res.json(JSON.stringify(quotes))
-        //res.json(quotes)
+        //res.json(JSON.stringify(quotes))
+        res.json(quotes)
     } catch (error) {
         res.send(error)
     }

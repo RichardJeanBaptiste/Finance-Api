@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react"
 import Typography from '@mui/material/Typography';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import { QueryClient, QueryClientProvider, useQuery, useQueryClient } from 'react-query';
+
+
+const queryClient = new QueryClient();
 
 export default function FinancialQuotesGrid(){
-
-    //const queryClient = new QueryClient();
 
     const [ QuoteData, setQuoteData ] = useState([]);
 
     
     useEffect(() => {
 
-        fetch('/quotes/all')
+        fetch('/test')
         .then(response => response.json())
         .then(data => setQuoteData(data))
         .catch(error => console.log(error))
@@ -23,6 +24,34 @@ export default function FinancialQuotesGrid(){
         console.log(QuoteData)
     }
 
+    function Quotes() {
+
+        // Access the cient
+        const queryClient = useQueryClient();
+
+        // Queries
+        const { isLoading, error, data } = useQuery('quotes', () =>
+
+            fetch('/quotes/all').then(res =>
+
+                res.json()
+
+            )
+
+        )
+
+
+        return (
+            <>
+                 
+                <button onClick={ () => console.log(data)}>
+                    Test Query
+                </button>
+            </>
+        )
+    
+    }
+
    
     return (
         <>
@@ -30,6 +59,11 @@ export default function FinancialQuotesGrid(){
             <button onClick={asd}>
                 Test
             </button>
+
+            <QueryClientProvider client={queryClient}>
+                <Quotes/>
+            </QueryClientProvider>
+            
 
         </>
     )

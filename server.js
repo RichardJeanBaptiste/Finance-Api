@@ -90,6 +90,11 @@ app.use(cors());
 app.use('/admin', AdminRoutes);
 app.use('/quotes', quoteRoute);
 
+app.get('/test', (req,res) => {
+
+    let x = ['a','b', 'c'];
+    res.send(JSON.stringify(x))
+})
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));

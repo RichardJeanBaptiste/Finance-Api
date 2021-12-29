@@ -25,7 +25,7 @@ export default function Home(){
         })
         .then(response => response.text())
         .then(data => {
-            console.log(data);
+            //console.log(data);
             setIsLoggedIn(data)
         });
 

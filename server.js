@@ -12,6 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 const quoteRoute = require('./routes/quoteRoutes');
 const AdminRoutes = require('./routes/AdminRoutes');
+const ListRoutes = require('./routes/ListRoute');
 const create = require('./create');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -89,12 +90,9 @@ app.use(cors());
 
 app.use('/admin', AdminRoutes);
 app.use('/quotes', quoteRoute);
+app.use('/list', ListRoutes);
 
-app.get('/test', (req,res) => {
 
-    let x = ['a','b', 'c'];
-    res.send(JSON.stringify(x))
-})
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));

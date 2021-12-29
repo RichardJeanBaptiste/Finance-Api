@@ -27,15 +27,13 @@ export default function FinancialQuotesGrid(){
     function Quotes() {
 
         // Access the cient
-        const queryClient = useQueryClient();
+        //const queryClient = useQueryClient();
 
         // Queries
         const { isLoading, error, data } = useQuery('quotes', () =>
 
             fetch('/quotes/all').then(res =>
-
                 res.json()
-
             )
 
         )

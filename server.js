@@ -23,8 +23,7 @@ const flash = require('connect-flash');
 const timeout = require('connect-timeout');
 const morgan = require('morgan');
 const saltRounds = 10;
-
-
+const MONGOURI = process.env.MONGO_URI || "mongodb+srv://Richinbk:VZUbwFmW3d4EUSjw@finance-api.jvol5.mongodb.net/Finance-Quotes?retryWrites=true&w=majority";
 
 // connect to database
 try {

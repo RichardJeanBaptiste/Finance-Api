@@ -4,25 +4,25 @@ const mongoose = require('mongoose');
 const path = require('path');
 const helmet = require('helmet');
 const cors = require('cors');
-const Quote = require('./models/qoute.models');
-const {Login, Admin} = require('./models/login.models');
-const loginSchema = require('./Schemas/login.schema');
-const bcrypt =  require('bcryptjs');
+//const Quote = require('./models/qoute.models');
+//const {Login, Admin} = require('./models/login.models');
+//const loginSchema = require('./Schemas/login.schema');
+//const bcrypt =  require('bcryptjs');
 const app = express();
 const PORT = process.env.PORT || 4000;
-const quoteRoute = require('./routes/quoteRoutes');
+const quoteRoute = require('./routes/QuoteRoutes');
 const AdminRoutes = require('./routes/AdminRoutes');
-const ListRoutes = require('./routes/ListRoute');
-const create = require('./create');
+//const create = require('./create');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy;
-const flash = require('connect-flash');
-const timeout = require('connect-timeout');
+//const LocalStrategy = require('passport-local').Strategy;
+//const flash = require('connect-flash');
+//const timeout = require('connect-timeout');
 const morgan = require('morgan');
-const saltRounds = 10;
+//const saltRounds = 10;
+const MONGOURI = process.env.MONGO_URI;
 
 
 
@@ -47,6 +47,7 @@ store.on('error', function(error) {
     console.log(error);
 });
 
+//Passport Middleware
 passport.serializeUser(function(user, done) {
     done(null, user);
 });
@@ -55,9 +56,8 @@ passport.deserializeUser(function(user, done) {
     done(null, user);
 });
 
+// Express Middleware
 app.use(express.static(path.join(__dirname, 'client/build')));
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -87,12 +87,10 @@ app.use(helmet.contentSecurityPolicy({
 app.use(morgan('combined'));
 app.use(cors());
 
-//aDADsaf
 
-
+// Routes
 app.use('/admin', AdminRoutes);
 app.use('/quotes', quoteRoute);
-app.use('/list', ListRoutes);
 
 
 
@@ -135,12 +133,12 @@ app.post('/addquotes', async function(req,res){
     
 });
 
-*/
+
 
 function haltOnTimedout (req, res, next) {
     if(!req.timedout) next()
 }
-
+*/
 
 
 app.listen(PORT, () => {

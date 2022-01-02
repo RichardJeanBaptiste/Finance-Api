@@ -51,8 +51,6 @@ passport.use(new LocalStrategy( async function(username, password, done) {
 
 
 // go to admin homepage
-
-
 router.post('/checklogin', function(req, res){
 
     const conn = mongoose.createConnection("mongodb+srv://Richinbk:VZUbwFmW3d4EUSjw@finance-api.jvol5.mongodb.net/Finance-Quotes?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology:true, poolSize:1});

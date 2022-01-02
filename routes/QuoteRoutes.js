@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose');
-const Quote = require('../models/qoute.models');
 const quoteSchema = require('../Schemas/quote.schema');
 const MONGOURI = process.env.MONGO_URI;
 
@@ -28,7 +27,7 @@ router.get('/:author', async function(req,res){
     const conn = mongoose.createConnection(MONGOURI, {useNewUrlParser: true, useUnifiedTopology:true, poolSize:1});
     const QuoteModel = conn.model('Quote', quoteSchema);
     
-    QuoteModel.find({name: req.params.author}, (err, docs) => {
+    QuoteModel.find({name: req.params.author.toLocaleLowerCase()}, (err, docs) => {
         if (err) res.send('Something broke on our end sorry!')
         res.json(docs)
     })
@@ -42,7 +41,7 @@ router.get('/:author/limit=:limit', async function(req,res){
     const QuoteModel = conn.model('Quote', quoteSchema);
 
     let limit = req.params.limit;
-    let author = req.params.author;
+    let author = req.params.author.toLocaleLowerCase();
 
     QuoteModel.find({name: author}, (err, docs) => {
         if (err) res.send('Something broke on our end sorry!')
@@ -80,7 +79,7 @@ router.get('/:author/random', function(req,res){
     const conn = mongoose.createConnection(MONGOURI, {useNewUrlParser: true, useUnifiedTopology:true, poolSize:1});
     const QuoteModel = conn.model('Quote', quoteSchema);
 
-    let author = req.params.author;
+    let author = req.params.author.toLocaleLowerCase();
     
 
     QuoteModel.find({name: author}, (err, docs) => {

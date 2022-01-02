@@ -4,24 +4,15 @@ const mongoose = require('mongoose');
 const path = require('path');
 const helmet = require('helmet');
 const cors = require('cors');
-//const Quote = require('./models/qoute.models');
-//const {Login, Admin} = require('./models/login.models');
-//const loginSchema = require('./Schemas/login.schema');
-//const bcrypt =  require('bcryptjs');
 const app = express();
 const PORT = process.env.PORT || 4000;
 const quoteRoute = require('./routes/QuoteRoutes');
 const AdminRoutes = require('./routes/AdminRoutes');
-//const create = require('./create');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const passport = require('passport')
-//const LocalStrategy = require('passport-local').Strategy;
-//const flash = require('connect-flash');
-//const timeout = require('connect-timeout');
 const morgan = require('morgan');
-//const saltRounds = 10;
 const MONGOURI = process.env.MONGO_URI;
 
 

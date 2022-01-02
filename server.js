@@ -25,7 +25,6 @@ const morgan = require('morgan');
 const MONGOURI = process.env.MONGO_URI;
 
 
-
 // connect to database
 try {
     mongoose.connect(MONGOURI, {useNewUrlParser: true, useUnifiedTopology:true}).catch((err)=> {

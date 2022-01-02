@@ -9,7 +9,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt =  require('bcryptjs');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const MONGOURI = process.env.MONGO_URI || "mongodb+srv://Richinbk:VZUbwFmW3d4EUSjw@finance-api.jvol5.mongodb.net/Finance-Quotes?retryWrites=true&w=majority";
+const MONGOURI = process.env.MONGO_URI;
 
 
 
@@ -53,10 +53,9 @@ passport.use(new LocalStrategy( async function(username, password, done) {
 // go to admin homepage
 router.post('/checklogin', function(req, res){
 
-    const conn = mongoose.createConnection("mongodb+srv://Richinbk:VZUbwFmW3d4EUSjw@finance-api.jvol5.mongodb.net/Finance-Quotes?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology:true, poolSize:1});
+    const conn = mongoose.createConnection(MONGOURI, {useNewUrlParser: true, useUnifiedTopology:true, poolSize:1});
     const SessionModel = conn.model('sessions', sessionSchema);
 
-    //console.log(req.body.username);
 
     SessionModel.find({ 'session.passport.user.username': req.body.username} , function(err, result){
         

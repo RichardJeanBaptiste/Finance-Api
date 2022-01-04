@@ -8,6 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 const quoteRoute = require('./routes/QuoteRoutes');
 const AdminRoutes = require('./routes/AdminRoutes');
+const EditRoutes = require('./routes/EditRoutes');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -81,6 +82,7 @@ app.use(cors());
 // Routes
 app.use('/admin', AdminRoutes);
 app.use('/quotes', quoteRoute);
+app.use('/edit', EditRoutes);
 
 
 

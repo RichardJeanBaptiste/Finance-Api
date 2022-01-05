@@ -10,6 +10,9 @@ router.post('/addquotes', async function(req,res){
         name: {
             type: String,
         },
+        quote: {
+            type: String,
+        },
         image: {
             type: String,
         },
@@ -25,28 +28,30 @@ router.post('/addquotes', async function(req,res){
     const conn = mongoose.createConnection(MONGOURI, {useNewUrlParser: true, useUnifiedTopology:true, poolSize:1});
     const QuoteModel = conn.model('Quote', quoteSchema);
 
+    let quotes = req.body.quotes;
 
-    const data = {
-        name: req.body.name,
-        image: req.body.image,
-        bio: {
-            desc: req.body.bio.desc,
-            life: req.body.bio.life,
-            wiki: req.body.bio.wiki,
-            networth: req.body.bio.networth,
-            education: req.body.bio.education,
+    for(let i = 0; i < req.body.quotes.length; i++){
+
+        let data = {
+            name: req.body.name,
+            image: req.body.image,
+            quote: quotes[i],
+            bio: {
+                desc: req.body.bio.desc,
+                life: req.body.bio.life,
+                wiki: req.body.bio.wiki,
+                networth: req.body.bio.networth,
+                education: req.body.bio.education,
+            }
         }
+        
+        QuoteModel.create(data, function (err, small) {
+            if (err) return handleError(err);
+            // saved!
+            console.log(small)
+        });
     }
-
-    QuoteModel.create(data, function (err, small) {
-        if (err) return handleError(err);
-        // saved!
-        console.log(small)
-    });
-
-
-   console.log(req.body)
-
+   
    res.send('Data recieved')
     
 });

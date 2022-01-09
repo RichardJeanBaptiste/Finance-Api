@@ -72,7 +72,7 @@ router.post('/checklogin', function(req, res){
 });
 
 
-router.post('/login', passport.authenticate('local', {failureRedirect: 'https://richardjeanbaptiste.github.io/Api-Manager-Dashboard/login/fail'}),function(req, res){
+router.post('/login', passport.authenticate('local', {failureRedirect: 'https://richardjeanbaptiste.github.io/Api-Manager-Dashboard/#/login/fail'}),function(req, res){
     try {
         
         req.session.save(function(err) {
@@ -81,7 +81,7 @@ router.post('/login', passport.authenticate('local', {failureRedirect: 'https://
             //console.log(req.session.user);
         })
         
-        res.redirect(`https://richardjeanbaptiste.github.io/Api-Manager-Dashboard/admin/home/${req.user._doc.username}/${uuidv4()}`);
+        res.redirect(`https://richardjeanbaptiste.github.io/Api-Manager-Dashboard/#/admin/home/${req.user._doc.username}/${uuidv4()}`);
     } catch (error) {
         console.log(error)
         res.send("Sorry couldn't get the homepage")

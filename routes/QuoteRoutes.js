@@ -15,6 +15,7 @@ router.get('/all', async function(req,res){
     QuoteModel.find({}, (err, docs) => {
         
         if (err) res.send('Something broke on our end sorry!')
+        mongoose.disconnect()
         res.json(docs)
     })
 
@@ -29,6 +30,7 @@ router.get('/:author', async function(req,res){
     
     QuoteModel.find({name: req.params.author.toLocaleLowerCase()}, (err, docs) => {
         if (err) res.send('Something broke on our end sorry!')
+        mongoose.disconnect()
         res.json(docs)
     })
 
@@ -52,6 +54,7 @@ router.get('/:author/limit=:limit', async function(req,res){
             quotelist.push(docs[i]);
         }
 
+        mongoose.disconnect();
         res.json(quotelist);
     })
 })
@@ -68,6 +71,7 @@ router.get('/all/random', function(req,res) {
 
         let random = Math.floor(Math.random() * docs.length)
 
+        mongoose.disconnect();
         res.json(docs[random])
     })
 })
@@ -87,6 +91,7 @@ router.get('/:author/random', function(req,res){
 
         let random = Math.floor(Math.random() * docs.length);
 
+        mongoose.disconnect();
         res.json(docs[random])
 
     })
@@ -113,6 +118,7 @@ router.get('/all/random/limit=:limit', function(req,res){
             quotelist.push(docs[random])
         }
 
+        mongoose.disconnect();
         res.json(quotelist)
 
 

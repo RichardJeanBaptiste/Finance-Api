@@ -21,7 +21,7 @@ router.post('/addquotes', async function(req,res){
             life: {type: String},
             wiki: {type: String},
             networth: {type: String},
-            educaation: {type: String},
+            education: {type: String},
         }
     })
 

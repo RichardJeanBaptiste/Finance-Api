@@ -1,3 +1,11 @@
+/**
+ * error-handling
+ * api-keys
+ * rate-limiting
+ * 
+ */
+
+
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -9,6 +17,7 @@ const PORT = process.env.PORT || 4000;
 const quoteRoute = require('./routes/QuoteRoutes');
 const AdminRoutes = require('./routes/AdminRoutes');
 const EditRoutes = require('./routes/EditRoutes');
+const PolicyRoutes = require('./routes/PolicyRoutes');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -83,6 +92,7 @@ app.use(cors());
 app.use('/admin', AdminRoutes);
 app.use('/quotes', quoteRoute);
 app.use('/edit', EditRoutes);
+app.use('/policies', PolicyRoutes);
 
 
 
@@ -96,41 +106,6 @@ function errorHandler(err, req, res, next){
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 }
 
-
-/*
-
-app.post('/addquotes', async function(req,res){
-    try {
-
-        let author = req.body.author;
-        let count = Object.keys(req.body).length;
-
-        if(count === 1){
-            res.send("Empty Params");
-        }else{
-
-            for(let key in req.body){
-                if(req.body[key] != author){
-                    //console.log(req.body[key]);
-                    create(author,req.body[key]);
-                }
-            }
-            res.send("Quotes Added");
-        }
-        
-    } catch (error) {
-        
-        res.send(error);
-    }
-    
-});
-
-
-
-function haltOnTimedout (req, res, next) {
-    if(!req.timedout) next()
-}
-*/
 
 
 app.listen(PORT, () => {

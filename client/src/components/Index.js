@@ -16,7 +16,7 @@ export default function Index(){
 
     return (
         <>
-            <Typography variant='h3' align='center' sx={{ marginTop: '3%', textDecoration:'underline'}}>Financial Quotes Api Reference</Typography>
+            <Typography variant='h3' align='center' sx={{ marginTop: '3%', textDecoration:'underline'}}>Financial Quotes Api</Typography>
             <Box sx={{ marginLeft: '1.5%'}}>
                 <br/>
                 <br/>

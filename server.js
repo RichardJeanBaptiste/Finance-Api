@@ -26,6 +26,7 @@ const morgan = require('morgan');
 const MONGOURI = process.env.MONGO_URI;
 
 
+/*
 // connect to database
 try {
     mongoose.connect(MONGOURI, {useNewUrlParser: true, useUnifiedTopology:true}).catch((err)=> {
@@ -107,6 +108,15 @@ function errorHandler(err, req, res, next){
 }
 
 
+
+app.listen(PORT, () => {
+    console.log(`Listening at http://localhost:${PORT}`)
+})
+*/
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname + '/views/index.html'))
+});
 
 app.listen(PORT, () => {
     console.log(`Listening at http://localhost:${PORT}`)

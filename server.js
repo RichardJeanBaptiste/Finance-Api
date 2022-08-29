@@ -27,7 +27,7 @@ const MONGOURI = process.env.MONGO_URI;
 
 
 
-// connect to database
+//// connect to database
 try {
     mongoose.connect(MONGOURI, {useNewUrlParser: true, useUnifiedTopology:true}).catch((err)=> {
         console.log(err)

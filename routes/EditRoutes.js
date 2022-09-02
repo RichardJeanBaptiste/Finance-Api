@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-//const quoteSchema = require('../Schemas/quote.schema');
 const MONGOURI = process.env.MONGO_URI;
 
 router.post('/addquotes', async function(req,res){

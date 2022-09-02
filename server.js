@@ -57,7 +57,8 @@ passport.deserializeUser(function(user, done) {
 });
 
 // Express Middleware
-app.use(express.static(path.join(__dirname, 'client/build')));
+//app.use(express.static(path.join(__dirname, 'client/build')));
+app.use("/public", express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -80,7 +81,7 @@ app.use(helmet.contentSecurityPolicy({
     directives: {
         defaultSrc: ["'self'"],
         imgSrc: ["'self'"],
-        scriptSrc: [" 'self'", "https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"],
+        scriptSrc: [" 'self'", "https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js", ],
         styleSrc: ["'self'", 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css'],
     }
 }))
@@ -95,11 +96,19 @@ app.use('/edit', EditRoutes);
 app.use('/policies', PolicyRoutes);
 
 
-
+/*
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
+*/
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname + '/views/index.html'));
+})
+
+app.get('/login', (req,res) => {
+    res.sendFile(path.join(__dirname + '/views/login.html'));
+})
 
 
 function errorHandler(err, req, res, next){

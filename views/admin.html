@@ -4,29 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/public/css/styles.css"/>
+    <script type="application/javascript" src="/public/js/admin.js"></script>
     <title>Admin</title>
 </head>
 <body>
     <h2 class="add-title">Add Quotes</h2>
-   
         <div class="main-content">
-            <form action="/addquotes"  method="POST">
+            <form action="/edit/addquotes"  method="POST">
                 <div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                        <input class="form-control author-input" name="author" type="text"/>
-                        <button class="btn btn-outline-secondary btn-sm" id="addBtn" type="button">Insert</button>
-                        <input class="btn btn-outline-success btn-sm" type="submit" value="Submit"/>
+
+                    <div style="display: flex; flex-direction: row;">
+                        <button class="btn btn-outline-secondary insert-button" id="addBtn" type="button">Insert</button>
+                        <input class="btn btn-outline-success submit-button" type="submit" value="Submit"/>
                     </div>
-                    <div class="add-form-container" id=formContainer>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-left">
+                        <div style="display: flex; flex-direction: column;">
+                            <input class="author-input" name="author" type="text" placeholder="author"/>
+                            <input class="author-input" name="image" type="text" placeholder="Image Url"/>
+                            <input class="author-input" name="description" type="text" placeholder="description"/>
+                            <input class="author-input" name="life" type="text" placeholder="life"/>
+                            <input class="author-input" name="wiki" type="text" placeholder="wiki"/>
+                            <input class="author-input" name="networth" type="text" placeholder="networth"/>
+                            <input class="author-input" name="education" type="text" placeholder="education"/>
+                        </div>
+
+                        <div class="add-form-container" id=formContainer>
                         
-                    </div>                   
-                        <button class="btn btn-outline-danger btn-md" type="button" id="clearButton">Clear</button>
+                        </div> 
+                    </div>
+                                      
+                        <button style="margin-top: 2%;" class="btn btn-outline-danger btn-md" type="button" id="clearButton">Clear</button>
                 </div> 
             </form>  
         </div>
            
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-    <script src="js/admin.js"></script>
+    
 </body>
 </html>

@@ -10,6 +10,7 @@ const bcrypt =  require('bcryptjs');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const MONGOURI = process.env.MONGO_URI;
+const path = require('path');
 
 
 
@@ -81,7 +82,12 @@ router.post('/login', passport.authenticate('local', {failureRedirect: 'https://
             //console.log(req.session.user);
         })
         
-        res.redirect(`https://richardjeanbaptiste.github.io/Api-Manager-Dashboard/#/admin/home/${req.user._doc.username}/${uuidv4()}`);
+        res.setHeader("Content-Security-Policy", "script-src 'self' https://fonts.gstatic.com/s/mulish/v12/1Ptyg83HX_SGhgqO0yLcmjzUAuWexRNR8aqvG4w-.woff2");
+        res.setHeader("Content-Security-Policy", "script-src 'self'  https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js");
+
+
+        res.sendFile(path.join(__dirname + '/../views/admin.html'));
+        //res.redirect(`https://richardjeanbaptiste.github.io/Api-Manager-Dashboard/#/admin/home/${req.user._doc.username}/${uuidv4()}`);
     } catch (error) {
         console.log(error)
         res.send("Sorry couldn't get the homepage")

@@ -27,6 +27,7 @@
 
 .main-content {
     margin-top: 6%;
+    margin-left: 1.5%;
 }
 
 .add-title {
@@ -52,16 +53,32 @@
     margin-left: 2%;
 }
 
+#test {
+    width: 40vw;
+    height: 40vh;
+}
+
 .author-input {
     margin-left: -15px;
-    width: 40vw;
+    width: 20vw;
     height: 6vh;
     text-align: center;
+    margin-top: 4%;
 }
 
 .input-container {
     display: flex;
     padding-bottom: 10px;
+}
+
+.insert-button {
+    width: 4vw;
+    height: 4vh;
+}
+
+.submit-button {
+    width: 4vw;
+    height: 4vh;
 }
 
 

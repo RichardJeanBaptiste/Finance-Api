@@ -28,32 +28,34 @@ router.post('/addquotes', async function(req,res){
     const conn = mongoose.createConnection(MONGOURI, {useNewUrlParser: true, useUnifiedTopology:true, poolSize:1});
     const QuoteModel = conn.model('Quote', quoteSchema);
 
-    let quotes = req.body.quotes;
-
-    for(let i = 0; i < req.body.quotes.length; i++){
+    for(let i = 7; i < Object.entries(req.body).length; i++){
 
         let data = {
-            name: req.body.name,
+            name: req.body.author.toLowerCase(),
             image: req.body.image,
-            quote: quotes[i],
+            quote: Object.entries(req.body)[i][1],
             bio: {
-                desc: req.body.bio.desc,
-                life: req.body.bio.life,
-                wiki: req.body.bio.wiki,
-                networth: req.body.bio.networth,
-                education: req.body.bio.education,
+                desc: req.body.description,
+                life: req.body.life,
+                wiki: req.body.wiki,
+                networth: req.body.networth,
+                education: req.body.education,
             }
         }
         
         QuoteModel.create(data, function (err, small) {
-            if (err) return handleError(err);
+            if (err) {
+                console.log(err);
+                res.send('An error occured while submitting the data')
+            }
             // saved!
             console.log(small)
         });
+
     }
    
    res.send('Data recieved')
-    
+   
 });
 
 
